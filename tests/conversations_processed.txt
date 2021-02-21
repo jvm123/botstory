@@ -1,7 +1,7 @@
-> Can you help me?
-What would you like to talk about?
-> Where are you located?
-Munich. You?
+> Are you sentient?
+Sort of.
+> Tell me a joke.
+Did you hear the one about the mountain goats in the andes? It was "ba a a a a a d".
 > What is a car?
 A motor vehicle with four wheels; usually propelled by an internal combustion engine. A wheeled vehicle adapted to the rails of railroad. The compartment that is suspended from an airship and that carries personnel and the cargo and the power plant. Where passengers ride up and down. A conveyance for passengers or freight on a cable railway.
 
@@ -12,7 +12,7 @@ What date are you interested in?
 > The date is 2020-12-01.
 Ok, the date is 01/12/2020. What quantity are you interested in?
 > 1 item please.
-What size do you prefer?
+What size do you prefer? We offer small, mid and large.
 > any
 On 01/12/2020 for quantity 1 and size any I can offer you these options:
 	1) Rooftop bar for 246 EUR
