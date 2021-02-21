@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<!-- HTML template inspired by https://github.com/chamkank/flask-chatterbot  -->
+<title>Service bot</title>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/style.css" />
+</head>
+<body>
+    <div class="topright"><a href="/doc">API docs</a></div>
+    <div>
+        <div id="chatbox">
+        </div>
+        <div id="userInput">
+            <input id="textInput" type="text" name="msg" placeholder="Message" />
+        </div>
+        <script>
+        getBotResponse("quit", true); // make sure remote session starts over anew
+
+        /* Show welcome message */
+        var botHtml = $('<p class="botText"><span>{{welcome}}<br /><br />Please note: You can return to the main menu at any time by pressing Escape.</span></p>');
+        $("#chatbox").append(botHtml.hide().fadeIn(1200));
+    /*    addWelcomeButtons();
+        $("#chatbox .activeui li").click(function() {
+            var val = $(this).html();
+            getBotResponse(val);
+        });*/
+
+        function addWelcomeButtons() {
+            /* Provide buttons with standard text queries a user may want to make */
+            var botHtml = $("<ul class=\"activeui\">{% for txt in home_buttons %}<li>{{txt}}</li>{% endfor %}</ul>");
+            //$("#chatbox p.botText:last-child").append(botHtml.hide().fadeIn(600));
+            $("#chatbox p:last-child").append(botHtml.hide().fadeIn(600));
+        }
+
+        var roomOptions = "";
+        function getBotResponse(query, hidden) {
+            $("#textInput").focus().select();
+
+   //         if (hidden) {
+                /* "Hidden" messages were not prompted by the user and the
+                    server reply is also not shown */
+   //             $.get("/chatbot/bot/" + encodeURI(query));
+   //             return;
+   //         }
+
+            /* Show user message in chat log and scroll to the correct position */
+            var userHtml = $('<p class="userText"><span>' + query + "</span></p>");
+            if (!hidden) {
+               $("#chatbox").append(userHtml.hide().fadeIn(800));
+
+               $("#chatbox p").last()[0]
+                   .scrollIntoView({ block: "start", behavior: "smooth" });
+            }
+
+            /* Send user message to server */
+            $.get("/chatbot/bot/" + encodeURI(query)).done(function(data) {
+                /* Hide buttons that were shown along with past bot messages */
+                $("#chatbox .activeui").remove();
+
+                /* Show bot response to user prompt */
+                response = data.response.split("\n").join("<br />");
+                buttons = data.buttons;
+
+                var botHtml = $('<p class="botText"><span>' + response + "</span></p>");
+
+                if (Array.isArray(buttons) && buttons.length > 0) {
+                    botHtml.append("<ul class=\"activeui\"><li>"+
+                            buttons.join("</li><li>")+"</li></ul>");
+                }
+
+                if (data.new_session ||
+                        ((!Array.isArray(buttons) || buttons.length == 0) &&
+                        response.indexOf("Let's start over.") >= 0)) {
+                    addWelcomeButtons();
+                } else {
+                    $("#chatbox").append(botHtml.hide().fadeIn(1200));
+                }
+                $("#chatbox .activeui li").click(function() {
+                    var val = $(this).html()
+                    var children = $(this).children("b");
+                    if (children.length > 0) {
+                        val = children.first().html()
+                    }
+                    getBotResponse(val);
+                });
+
+                /* Scroll to correct position */
+                $("#chatbox p").last()[0]
+                    .scrollIntoView({ block: "start", behavior: "smooth" });
+            }).fail(function (data) {
+                var botHtml = $('<p class="errorText"><span>' + data.status +
+                        ": " + data.responseText + "</span></p>");
+                $("#chatbox").append(botHtml);
+            });
+        }
+
+        /* Process user message on return key press */
+        $("#textInput").keypress(function(e) {
+            if (e.key === "Enter") {
+                var query = $("#textInput").val();
+                $("#textInput").val("");
+                getBotResponse(query);
+            }
+        });
+        $(document).keyup(function(e) {
+            if (e.key === "Escape") {
+                getBotResponse("quit", true);
+            }
+        });
+        setInterval(function() { $.get("/chatbot/ping"); }, 15000);
+        </script>
+    </div>
+</body>
+</html>

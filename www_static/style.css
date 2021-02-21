@@ -1,0 +1,101 @@
+body {
+    font-family: monospace;
+    padding: 5% 10%;
+}
+h1 {
+    background-color: yellow;
+    display: inline-block;
+    font-size: 3em;
+    margin: 0;
+    padding: 1em;
+}
+h3 {
+    color: black;
+    font-size: 2em;
+    margin-top: 3px;
+    text-align: center;
+}
+.topright {
+    position: fixed;
+    top: 1em;
+    right: 1em;
+}
+#chatbox {
+    width: 100%;
+}
+#chatbox ul li {
+    color: #888;
+    font-size: 1.5em;
+    line-height: 1.5em;
+    list-style-type: none;
+    display: inline-block;
+    border: 1px dotted #888;
+    border-radius: 2px;
+    padding: 1em;
+    margin-right: 2em;
+    margin-bottom: 2em;
+}
+#chatbox ul li img {
+    height: 150px;
+}
+#chatbox ul li:hover {
+    background: #bbb;
+    color: #333;
+}
+#userInput {
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    padding: 1em;
+    background: white;
+}
+#textInput {
+    width: calc(100% - 2em);
+    border: none;
+    border-bottom: 3px solid black;
+    font-size: 1.5em;
+    padding: 0.5em;
+    background: #eee;
+}
+.userText {
+    color: white;
+    text-align: right;
+}
+.userText span {
+    background-color: #808080;
+    font-size: 1.5em;
+    line-height: 1.5em;
+    padding: 1em;
+    border-radius: 2px;
+    display: inline-block;
+    box-shadow: #88f 0px 0px 4px;
+}
+.botText {
+    color: white;
+    padding: 1em;
+    text-align: left;
+}
+.botText span {
+    background-color: #4169e1;
+    font-size: 1.5em;
+    line-height: 1.5em;
+    border-radius: 2px;
+    display: inline-block;
+    box-shadow: #88f 0px 0px 4px;
+    padding: 1em 1.5em;
+}
+.errorText {
+    color: white;
+    padding: 1em;
+    text-align: left;
+}
+.errorText span {
+    background-color: #f33;
+    font-size: 1.5em;
+    line-height: 1.5em;
+    border-radius: 2px;
+    display: inline-block;
+    box-shadow: #f00 0px 0px 4px;
+    padding: 1em 1.5em;
+}
