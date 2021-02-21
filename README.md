@@ -2,7 +2,12 @@
 
 ## Intro
 
-Small talk capable chatbot based on Chatterbot to facilitate information requests and action triggers. An abstract interface to specify storyline branching and entity type schemas is provided by the BotStory class. A web interface with buttons for storyline dependent default selections is provided.
+This repository contains the BotStory class, an abstract interface to specify storyline branching and entity type schemas for the simple design of natural language chatbot conversation flows. It is based on [ChatterBot](https://github.com/gunthercox/ChatterBot) and [NLTK](https://www.nltk.org).
+
+A demo chatbot is provided in the example folder.
+A command line and a [Flask](https://flask.palletsprojects.com/en/1.1.x/) based web interface is also provided. The web interface displays storyline dependent default selections.
+
+![Web interface screenshot](flask_screenshot.png)
 
 ## Using Docker
 
@@ -26,23 +31,23 @@ Prepare necessary requirements with
 apt update
 apt install python3 python3-pip
 make install
-'''
+```
 
 ### Running
 
 Run command line interface with
-'''
+```
 make run
-'''
+```
 
 Run the web UI with
-'''
+```
 make flask
-'''
+```
 The web application runs on part 8080 by default.
 
 Display other available commands by using
-'''
+```
 make help
-'''
+```
 

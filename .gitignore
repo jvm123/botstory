@@ -2,7 +2,6 @@
 .*~
 .*.swp
 *~
-*.png
 bin/
 lib/
 .vscode/
